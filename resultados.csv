@@ -1,0 +1,10 @@
+id_prueba,algoritmo,propiedad,descripcion,esperado,obtenido,estado,comentario
+A1-01,A1,determinismo,Misma cadena e índice producen la misma clave,misma clave,misma clave,OK,HKDF es determinista
+A1-02,A1,unicidad,10 claves de mensaje distintas,10 claves distintas,10 claves distintas,OK,el índice y la cadena cambian en cada mensaje
+A1-03,A1,cifrado,Cifrar y descifrar 10 mensajes,10/10 correctos,10/10 correctos,OK,AES-GCM con una clave distinta por mensaje
+A1-04,A1,borrado,Clave usada y luego borrada no se recupera,no recuperable,no recuperable,OK,HKDF es de un solo sentido: la cadena nueva no lleva a la vieja
+A2-01,A2,descifrado,Descifrar los 6 mensajes,6/6 correctos,6/6 correctos,OK,3 mensajes por dirección con un cambio de par X25519
+A2-02,A2,integridad,Un byte alterado del ciphertext,rechazado,rechazado,OK,AES-GCM detecta el cambio (InvalidTag)
+A2-03,A2,repetición,Mensaje reenviado,rechazado,rechazado,OK,el número n ya pasó y su clave fue borrada
+A2-04,A2,forward secrecy,Estado robado tras mensaje 3 no descifra mensaje 1,no descifrable,no descifrable,OK,la clave del mensaje 1 se borró y la cadena solo avanza hacia adelante
+A2-05,A2,post-compromise,Estado robado antes del cambio de dirección no descifra tras él,no descifrable,no descifrable,OK,la nueva privada X25519 de Bob no estaba en el estado robado
